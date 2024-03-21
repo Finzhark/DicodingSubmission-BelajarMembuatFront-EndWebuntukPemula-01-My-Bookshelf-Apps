@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta 
+        name="viewport" 
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>My Bookshelf App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="head-bar">
+        <h1 class="head-bar-title">My Bookshelf App</h1>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>Silakan masukkan buku baru!</h2>
+            <form id="formInputBook" class="form-input-book">
+                <div class="input">
+                    <label for="inputBookTitle">Judul</label>
+                    <input id="inputBookTitle" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="inputBookAuthor">Penulis</label>
+                    <input id="inputBookAuthor" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="inputBookYear">Tahun</label>
+                    <input id="inputBookYear" type="number" required>
+                </div>
+                <div class="input-check">
+                    <label for="inputBookIsCompleted">Buku selesai dibaca</label>
+                    <input id="inputBookIsCompleted" type="checkbox">
+                </div>
+                <button id="bookSubmit" type="submit" value="Submit" class="btn-submit">Tambahkan Buku</button>
+            </form>
+        </section>
+
+        <section class="search-section">
+            <h2>Mencari buku</h2>
+            <form id="formSearchBook" class="form-search-book">
+                <label for="searchBook"></label>
+                <input id="searchBook" type="search" placeholder="Masukkan judul atau penulis buku">
+                <button id="searchSubmit" type="submit">Cari</button>
+                <!-- Ketik user mengetik 1 string saja, seharusnya sudah muncul apa yang user cari. Tombol "Cari" bisa dipakai untuk meyakinkan user. Ketika user menghapus sehingga string menjadi kosong, maka daftar rak buku kembali seperti semula. 
+                Kesimpulan: ada tiga atau empat fungsi pada form ini.
+                -->
+            </form>
+        </section>
+
+        <section class="book-shelf">
+            <h2>Belum selesai dibaca</h2>
+            <div id="incompleteBookshelfList" class="book-list">
+                <!-- 
+                <article class="book-item">
+                    <h3>Judul buku</h3>
+                    <p>Penulis: John Doe</p>
+                    <p>Tahun: 2012</p>
+                    <div class="action">
+                        <button class="green">Selesai dibaca</button>
+                        <button class="yellow">Edit buku</button>
+                        <button class="red">Hapus buku</button>
+                    </div>
+                </article> 
+                -->
+            </div>
+        </section>
+
+        <section class="book-shelf">
+            <h2>Selesai dibaca</h2>
+            <div id="completeBookshelfList" class="book-list">
+                <!-- 
+    <article class="book-item">
+        <h3>Judul buku</h3>
+        <p>Penulis: John Doe</p>
+        <p>Tahun: 2002</p>
+  
+        <div class="action">
+            <button class="green">Belum selesai dibaca</button>
+            <button class="yellow">Edit buku</button>
+            <button class="red">Hapus buku</button>
+        </div>
+    </article> 
+
+-->
+<!-- <article class="edit-book-item">
+    <form class="form-edit-book">
+        <div class="input">
+            <label for="editBookTitle">Judul</label>
+            <input id="editBookTitle" type="text" required>
+        </div>
+        <div class="input">
+            <label for="editBookAuthor">Penulis</label>
+            <input id="editBookAuthor" type="text" required>
+        </div>
+        <div class="input">
+            <label for="editBookYear">Tahun</label>
+            <input id="editBookYear" type="number" required>
+        </div>
+        <button id="bookSubmit" type="submit" value="Submit" class="btn-ok-edit-submit">Selesai edit</button>
+        <button id="bookSubmit" type="submit" value="Submit" class="btn-cancel-edit-submit">Cancel</button>
+    </form> -->
+            </div>
+        </section>
+    </main>
+    
+    <script src="js/main.js" type="text/javascript"></script>
+</body>
+</html>
