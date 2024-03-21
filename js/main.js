@@ -1,29 +1,8 @@
-/**
-* [
-*     {
-*         id: <int>
-*         book: <string>
-*         author: <string>
-*         year: <int>
-*         isCompleted: <boolean>
-*     }
-* ]
-*/
-
-// Key untuk menyimpan data di localStorage
 const STORAGE_KEY = 'bookshelf_apps' 
-
-// Event yang dipicu saat data disimpan
 const SAVED_EVENT = 'saved-book' 
-
-// Event yang dipicu saat perlu merender ulang daftar buku
 const RENDER_EVENT = 'render-book' 
-
-// Array untuk menyimpan daftar buku
 const books = [] 
 
-
-// Membangkitkan event DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     const submitBookForm = document.getElementById('formInputBook')
     submitBookForm.addEventListener('submit', function(event) {
@@ -36,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 })
 
-// Fungsi menambahkan buku baru
 function addBook() {
     const title = document.getElementById('inputBookTitle').value
     const author = document.getElementById('inputBookAuthor').value
@@ -47,18 +25,18 @@ function addBook() {
     const bookObject = generateBookObject(generatedID, title, author, year, isCompleted)
     books.push(bookObject)
 
-    alert(`Buku ${title} berhasil dimasukkan ke rak!`)
+    alert(`Buku ${title} yang ditulis oleh ${author}, berhasil dimasukkan ke rak!`)
    
     document.dispatchEvent(new Event(RENDER_EVENT))
     saveData()
+    
+    document.getElementById('formInputBook').reset()
 }
-  
-// Fungsi untuk menghasilkan ID unik berdasarkan timestamp
+
 function generateId() {
     return +new Date().getTime()
 }
-   
-// Fungsi untuk membuat objek buku berdasarkan input pengguna
+
 function generateBookObject(id, title, author, year, isCompleted) {
     return {
         id,
@@ -69,15 +47,10 @@ function generateBookObject(id, title, author, year, isCompleted) {
     }
 }
   
-// Event listener untuk merender ulang daftar buku saat perlu
 document.addEventListener(RENDER_EVENT, function () {
-    console.log(books)
-
-    // Filter hanya book yang belum selesai dibaca yang muncul
     const incompleteBookshelfList = document.getElementById('incompleteBookshelfList')
     incompleteBookshelfList.innerHTML = ''
 
-    // Selesai dibaca
     const completeBookList = document.getElementById('completeBookshelfList')
     completeBookList.innerHTML = ''
    
@@ -91,7 +64,6 @@ document.addEventListener(RENDER_EVENT, function () {
     }
 })
 
-// Fungsi untuk membuat elemen buku di tag article berdasarkan objek buku
 function createBook(bookObject) {
     const  {id, title, author, year, isCompleted} = bookObject
 
@@ -168,7 +140,6 @@ function createBook(bookObject) {
     return bookItem
 }
 
-// Agar tombol green button berfungsi
 function addDoneBookToCompleted(bookId) {
     const bookTarget = findBook(bookId)
    
@@ -179,7 +150,6 @@ function addDoneBookToCompleted(bookId) {
     saveData()
 }
 
-// Sambungan di atas agar tidak error
 function findBook(bookId) {
     for (const bookItem of books) {
         if (bookItem.id == bookId) return bookItem
@@ -187,7 +157,6 @@ function findBook(bookId) {
     return null
 }
 
-// 
 function deleteBookFormCompleted(bookId) {
     const bookTarget = findBookIndex(bookId)
     
@@ -225,7 +194,6 @@ function findBookIndex(bookId) {
     return -1 
 }
 
-// Fungsi untuk menyimpan data buku ke local storage
 function saveData() {
     if (isLocalStorageExist()) {
         const parsed = JSON.stringify(books) 
@@ -234,7 +202,6 @@ function saveData() {
     }
 }
 
-// Fungsi untuk memeriksa apakah local storage tersedia di browser pengguna
 function isLocalStorageExist() {
     if (typeof(Storage) === 'undefined') {
         alert('Aduh, browser kamu tidak mendukung local storage!')
@@ -243,13 +210,6 @@ function isLocalStorageExist() {
     return true
 }
 
-// Pengecekkan local storage
-document.addEventListener(SAVED_EVENT, function () {
-    console.log(localStorage.getItem(STORAGE_KEY))
-    // alert(localStorage.getItem(STORAGE_KEY))
-})
-
-// Data dari local storage tampil pertama kali saat halaman dimuat
 function loadDataBookFromLocalStorage() {
     const serializedData = localStorage.getItem(STORAGE_KEY)
     let dataBook = JSON.parse(serializedData)
@@ -263,55 +223,41 @@ function loadDataBookFromLocalStorage() {
     document.dispatchEvent(new Event(RENDER_EVENT))
 }
 
-// AKHIRNYA
-
-// Tambahan:
-// Fungsi untuk membuka form edit buku di dalam tag artikel
 function editBookFromBookshelf(bookId) {
     const book = findBook(bookId) 
 
-    // Gunakan prompt untuk mengambil input dari pengguna
     let editTitleBook = prompt('Masukkan judul baru:', book.title) 
     let editAuthorBook = prompt('Masukkan penulis baru:', book.author) 
     let editYearBook = prompt('Masukkan tahun baru:', book.year) 
 
-    // Loop sampai pengguna memasukkan tahun yang valid
     while (true) {
         if (editYearBook === null) {
-            // Jika pengguna membatalkan prompt, hentikan loop
             alert('Kamu tidak jadi edit buku.') 
             return 
         }
 
-        // Periksa apakah input dapat diubah menjadi angka
         editYearBook = parseInt(editYearBook) 
         if (!isNaN(editYearBook)) {
-            // Jika input valid, keluar dari loop
             break 
         } else {
-            // Jika input tidak valid, minta pengguna untuk memasukkan ulang
             editYearBook = prompt('Tahun yang dimasukkan tidak valid. Masukkan tahun yang baru:') 
         }
     }
 
-    // Validasi input judul dan penulis
     while (true) {
         if (!editTitleBook) {
             editTitleBook = prompt('Judul tidak boleh kosong. Masukkan judul baru:') 
         } else if (!editAuthorBook) {
             editAuthorBook = prompt('Nama penulis tidak boleh kosong. Masukkan nama penulis baru:') 
         } else {
-            // Semua input valid, tampilkan konfirmasi
             const confirmationMessage = `Apakah kamu yakin ingin menyimpan perubahan untuk buku:\nJudul: ${editTitleBook}\nPenulis: ${editAuthorBook}\nTahun: ${editYearBook}` 
             const isConfirmed = window.confirm(confirmationMessage) 
 
             if (isConfirmed) {
-                // Ubah informasi buku
                 book.title = editTitleBook 
                 book.author = editAuthorBook 
                 book.year = editYearBook 
 
-                // Simpan data dan panggil fungsi render
                 saveData() 
                 document.dispatchEvent(new Event(RENDER_EVENT)) 
             } else {
@@ -322,8 +268,6 @@ function editBookFromBookshelf(bookId) {
     }
 }
 
-
-// Event listener untuk pencarian buku
 const formSearchBook = document.getElementById('formSearchBook')
 formSearchBook.addEventListener('submit', function(event) {
     event.preventDefault()
@@ -335,7 +279,6 @@ formSearchBook.addEventListener('submit', function(event) {
     renderFilteredBooks(filteredBooks)
 })
 
-// Event listener untuk menghapus pencarian dan merender ulang daftar buku ke kondisi semula
 const searchBook = document.getElementById('searchBook')
 searchBook.addEventListener('input', function(event) {
     const searchValue = event.target.value.trim().toLowerCase()
@@ -344,7 +287,6 @@ searchBook.addEventListener('input', function(event) {
     }
 })
 
-// Fungsi untuk merender daftar buku yang telah difilter berdasarkan pencarian
 function renderFilteredBooks(filteredBooks) {
     const incompleteBookshelfList = document.getElementById('incompleteBookshelfList')
     const completeBookshelfList = document.getElementById('completeBookshelfList')
@@ -362,7 +304,6 @@ function renderFilteredBooks(filteredBooks) {
     })
 }
 
-// Fungsi untuk merender kembali semua buku ke dalam daftar rak buku
 function renderAllBooks() {
     const incompleteBookshelfList = document.getElementById('incompleteBookshelfList')
     const completeBookshelfList = document.getElementById('completeBookshelfList')
@@ -379,5 +320,3 @@ function renderAllBooks() {
         }
     })
 }
-
-// ADUH LAPAR
