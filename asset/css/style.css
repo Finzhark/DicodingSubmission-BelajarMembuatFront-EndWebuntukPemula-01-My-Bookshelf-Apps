@@ -17,20 +17,22 @@ body {
         rgba(49, 46, 39, 0.3), 
         rgba(49, 46, 39, 0.5), 
         rgba(49, 46, 39, 0.7)),
-    url("../image/bookshelf.jpg");
-    background-position: center;
+    url("../image/bookshelf.jpg");    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 
-body, input, button {
+body, 
+input, 
+button {
     font-family: 'Averia Serif Libre', 'Merriweather', serif;
     background-color: rgba(221, 210, 183, .5);
     color: #312E27
 }
 
-input, button {
+input, 
+button {
     font-size: 16px;
 }
 
@@ -40,6 +42,14 @@ button {
     margin: 0 5px 0 0;
     border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 .head-bar {
@@ -83,7 +93,8 @@ nav a {
     font-size: 13px;
 }
 
-nav a:hover, nav a:active {
+nav a:hover, 
+nav a:active {
     font-weight: bold;
 }
 
@@ -132,14 +143,6 @@ main {
 .red {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-}
-
-button:hover {
-    transform: scale(1.02);
-}
-
-button:active {
-    transform: scale(0.98);
 }
 
 .input-section > form > .input > input {
