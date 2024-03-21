@@ -112,7 +112,7 @@ function createBook(bookObject) {
     } else {
         const addDoneButton = document.createElement('button')
         addDoneButton.classList.add('green')
-        addDoneButton.innerText = 'Tandai sudah selesai dibaca'
+        addDoneButton.innerText = 'Tandai selesai dibaca'
 
         addDoneButton.addEventListener('click', function() {
             addDoneBookToCompleted(id)

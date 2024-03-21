@@ -6,15 +6,26 @@
         name="viewport" 
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>My Bookshelf App</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="head-bar">
-        <h1 class="head-bar-title">My Bookshelf App</h1>
         <nav>
+            <h1 class="head-bar-title">My Bookshelf App</h1>
+            <input type="checkbox" class="navbar-button" id="navbar-hamburger"/>
+            <label for="navbar-hamburger" class="navbar-hamburger-icon">
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+                <div class="stripe"></div>
+            </label>
+
             <ul>
                 <li>
-                    <a href="#input-new-book">Form buku baru</a>
+                    <a href="#">Form buku baru</a>
                 </li>
                 <li>
                     <a href="#searching-books">Mencari buku</a>
@@ -23,14 +34,14 @@
                     <a href="#incomplete-bookshelf">Belum selesai dibaca</a>
                 </li>
                 <li>
-                    <a href="incomplete-bookshelf">Selesai dibaca</a>
+                    <a href="#complete-bookshelf">Selesai dibaca</a>
                 </li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="input-section" id="input-new-book">
+        <section class="input-section" id="#">
             <h2>Silakan masukkan buku baru!</h2>
             <form id="formInputBook" class="form-input-book">
                 <div class="input">
@@ -57,8 +68,8 @@
             <h2>Mencari buku</h2>
             <form id="formSearchBook" class="form-search-book">
                 <label for="searchBook"></label>
-                <input id="searchBook" type="search" placeholder="Masukkan judul atau penulis buku">
-                <button id="searchSubmit" type="submit">Cari</button>
+                <input id="searchBook" class="input-search" type="search" placeholder="Masukkan judul atau penulis buku">
+                <button id="searchSubmit" type="submit" class="btn-search">Cari</button>
             </form>
         </section>
 
@@ -76,8 +87,8 @@
     </main>
     
     <footer>
-        <p>Dibuat oleh ...</p>
+        <p>Dibuat oleh <a href="https://github.com/Finzhark">Finzhark</a></p>
     </footer>
-    <script src="js/main.js" type="text/javascript"></script>
+    <script src="asset/js/main.js" type="text/javascript"></script>
 </body>
 </html>
